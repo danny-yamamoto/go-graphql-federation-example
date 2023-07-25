@@ -10,7 +10,9 @@
 			"extensions": [
 				"GraphQL.vscode-graphql-syntax",
 				"GraphQL.vscode-graphql",
-				"apollographql.vscode-apollo"
+				"apollographql.vscode-apollo",
+				"Postman.postman-for-vscode",
+				"rangav.vscode-thunder-client"
 			]
 		}
 	}
