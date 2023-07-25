@@ -10,7 +10,7 @@ import (
 	"github.com/danny-yamamoto/go-graphql-federation-example/users/graph"
 )
 
-const defaultPort = "8080"
+const defaultPort = "4000"
 
 func main() {
 	port := os.Getenv("PORT")
