@@ -6,8 +6,10 @@ package graph
 
 import (
 	"context"
+	"strings"
 
 	"github.com/danny-yamamoto/go-graphql-federation-example/users/graph/model"
+	"github.com/vektah/gqlparser/v2/formatter"
 )
 
 // CreateTodo is the resolver for the createTodo field.
@@ -20,6 +22,21 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 			Name: "name",
 		},
 	}, nil
+}
+
+// Service is the resolver for the service field.
+func (r *queryResolver) Service(ctx context.Context) (*model.Service, error) {
+	s := new(strings.Builder)
+	f := formatter.NewFormatter(s)
+	// parsedSchema is in the generated code
+	f.FormatSchema(parsedSchema)
+
+	service := model.Service{
+		Name:    "user-service",
+		Version: "0.1.0",
+		Schema:  s.String(),
+	}
+	return &service, nil
 }
 
 // Todos is the resolver for the todos field.

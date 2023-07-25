@@ -1,7 +1,6 @@
 # GraphQL schema example
 #
 # https://gqlgen.com/getting-started/
-directive @boundary on OBJECT | FIELD_DEFINITION
 
 type Todo {
   id: ID!
@@ -16,7 +15,6 @@ type User {
 }
 
 type Query {
-  service: Service!
   todos: [Todo!]!
 }
 
@@ -27,10 +25,4 @@ input NewTodo {
 
 type Mutation {
   createTodo(input: NewTodo!): Todo!
-}
-
-type Service {
-  name: String!
-  version: String!
-  schema: String!
 }
