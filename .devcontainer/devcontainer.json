@@ -12,7 +12,8 @@
 				"GraphQL.vscode-graphql",
 				"apollographql.vscode-apollo",
 				"Postman.postman-for-vscode",
-				"rangav.vscode-thunder-client"
+				"rangav.vscode-thunder-client",
+				"bierner.markdown-mermaid"
 			]
 		}
 	}

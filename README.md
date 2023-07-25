@@ -1,6 +1,15 @@
 # go-graphql-federation-example
 Implement GraphQL Federation.
 
+```mermaid
+flowchart LR
+    Gateway["Gateway
+    Bramble"]
+    Subgraph["Subgraph
+    gqlgen"]
+    Client --> Gateway --> Subgraph
+```
+
 ## Installation
 ```bash
 go install github.com/99designs/gqlgen@latest
