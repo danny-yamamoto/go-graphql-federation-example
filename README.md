@@ -19,7 +19,7 @@ go get github.com/99designs/gqlgen/graphql/handler
 ## Add Subgraph
 ### Add `Service`
 - `schema.graphqls`
-```json
+```graphql
 type Service {
   name: String!
   version: String!
