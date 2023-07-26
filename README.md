@@ -89,6 +89,23 @@ vscode ➜ /workspaces/go-graphql-federation-example (main) $ curl -X POST -H "C
 {"data":{"todos":[{"id":"TODO-1","text":"My Todo 1"},{"id":"TODO-2","text":"My Todo 2"}]}}vscode ➜ /workspaces/go-graphql-federation-example (main) $
 ```
 
+## Implement your own schema
+### Create directory
+```bash
+mkdir -p contact
+go mod init github.com/danny-yamamoto/go-graphql-federation-example/contact
+go get -u github.com/99designs/gqlgen
+go install github.com/99designs/gqlgen@latest
+go get github.com/99designs/gqlgen/graphql/handler
+```
+### Add a package directory to go.work
+### Create a schema file
+```bash
+touch schema.graphqls
+touch gqlgen.yml
+gqlgen generate
+```
+
 ## Reference
 - [GraphQL の基本](https://learn.microsoft.com/ja-jp/azure/developer/javascript/how-to/with-web-app/graphql/static-web-app-graphql/graphql-basics)
 - [Bramble Getting started](https://movio.github.io/bramble/#/getting-started?id=querying-bramble)
