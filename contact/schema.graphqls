@@ -1,0 +1,24 @@
+directive @boundary on OBJECT | FIELD_DEFINITION
+
+type Contact {
+  firstname: String!
+}
+
+type Query {
+  service: Service!
+  contacts: [Contact!]!
+}
+
+type Service {
+  name: String!
+  version: String!
+  schema: String!
+}
+
+input NewContact {
+  firstname: String!
+}
+
+type Mutation {
+  createContact(input: NewContact!): Contact!
+}
