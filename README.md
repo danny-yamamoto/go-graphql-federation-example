@@ -3,11 +3,13 @@ Implement GraphQL Federation.
 
 ```mermaid
 flowchart LR
-    Gateway["Gateway
-    Bramble"]
-    Subgraph["Subgraph
-    gqlgen"]
-    Client --> Gateway --> Subgraph
+    Gateway["Gateway"]
+    Subgraph1["Subgraph1
+    users"]
+    Subgraph2["Subgraph2
+    contact"]
+    Client -->|8082| Gateway -->|4000| Subgraph1
+    Gateway -->|4001| Subgraph2
 ```
 
 ## Installation
@@ -33,25 +35,8 @@ gqlgen generate
 ```
 
 ### Add resolver
-```go
-func (r *queryResolver) Service(ctx context.Context) (*model.Service, error) {
-    // start
-	s := new(strings.Builder)
-	f := formatter.NewFormatter(s)
-	// parsedSchema is in the generated code
-	f.FormatSchema(parsedSchema)
 
-	service := model.Service{
-		Name:    "user-service",
-		Version: "0.1.0",
-		Schema:  s.String(),
-	}
-	return &service, nil
-    // end
-}
-```
-
-## Running Subgraph
+## Running Subgraph1
 ```bash
 vscode ➜ /workspaces/go-graphql-federation-example/users (main) $ go run server.go 
 2023/07/25 04:31:12 connect to http://localhost:4000/ for GraphQL playground
@@ -63,7 +48,7 @@ vscode ➜ /workspaces/go-graphql-federation-example (main) $ curl -X POST -H "C
 vscode ➜ /workspaces/go-graphql-federation-example (main) $ 
 ```
 
-## Running Bramble
+## Running Gateway
 ```bash
 go install github.com/movio/bramble/cmd/bramble@latest
 touch config.json
@@ -74,19 +59,25 @@ cd cmd/bramble/
 go run main.go -conf ./config.json 
 ```
 
-## Querying Bramble
-### `id` only
+## Querying Gateway
+### users | `id` only
 ```bash
 vscode ➜ /workspaces/go-graphql-federation-example (main) $ curl -X POST -H "Content-Type: Application/json" -d '{"query":"{ todos { id } }"}' http://localhost:8082/query
 {"data":{"todos":[{"id":"TODO-1"},{"id":"TODO-2"}]}}
 vscode ➜ /workspaces/go-graphql-federation-example (main) $ 
 ```
 
-### `id` and `text`
-### 
+### users | `id` and `text`
 ```bash
 vscode ➜ /workspaces/go-graphql-federation-example (main) $ curl -X POST -H "Content-Type: Application/json" -d '{"query":"{ todos { id text } }"}' http://localhost:8082/query
 {"data":{"todos":[{"id":"TODO-1","text":"My Todo 1"},{"id":"TODO-2","text":"My Todo 2"}]}}vscode ➜ /workspaces/go-graphql-federation-example (main) $
+```
+
+### contact 
+```bash
+root ➜ /workspaces/go-graphql-federation-example/contact (main) $ curl -X POST -H "Content-Type: Application/json" -d '{"query":"{ contacts { firstname } }"}' http://localhost:8082/query
+{"data":{"contacts":[{"firstname":"mirai"}]}}
+root ➜ /workspaces/go-graphql-federation-example/contact (main) $ 
 ```
 
 ## Implement your own schema
