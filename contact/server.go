@@ -14,7 +14,7 @@ import (
 const defaultPort = "4001"
 
 func main() {
-	port := os.Getenv("PORT")
+	port := os.Getenv("CONTACT_PORT")
 	if port == "" {
 		port = defaultPort
 	}
