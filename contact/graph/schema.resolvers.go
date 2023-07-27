@@ -23,7 +23,7 @@ func (r *queryResolver) Service(ctx context.Context) (*model.Service, error) {
 	//panic(fmt.Errorf("not implemented: Service - service"))
 	s := new(strings.Builder)
 	f := formatter.NewFormatter(s)
-	f.FormatSchema(parsedSchema)
+	f.FormatSchema(r.Schema)
 	service := model.Service{
 		Name:    "user-service",
 		Version: "0.1.0",
