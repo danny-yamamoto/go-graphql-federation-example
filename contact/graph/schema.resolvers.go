@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/danny-yamamoto/go-graphql-federation-example/contact/graph/model"
+	"github.com/danny-yamamoto/go-graphql-federation-example/contact/internal"
 	"github.com/vektah/gqlparser/v2/formatter"
 )
 
@@ -38,11 +39,11 @@ func (r *queryResolver) Contacts(ctx context.Context) ([]*model.Contact, error) 
 	return []*model.Contact{{Firstname: "mirai"}}, nil
 }
 
-// Mutation returns MutationResolver implementation.
-func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
+// Mutation returns internal.MutationResolver implementation.
+func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 
-// Query returns QueryResolver implementation.
-func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+// Query returns internal.QueryResolver implementation.
+func (r *Resolver) Query() internal.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
