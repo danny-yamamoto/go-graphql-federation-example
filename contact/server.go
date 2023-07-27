@@ -8,6 +8,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/danny-yamamoto/go-graphql-federation-example/contact/graph"
+	"github.com/danny-yamamoto/go-graphql-federation-example/contact/internal"
 )
 
 const defaultPort = "4001"
@@ -18,8 +19,8 @@ func main() {
 		port = defaultPort
 	}
 
-	es := graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}})
-	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{Schema: es.Schema()}}))
+	es := internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{}})
+	srv := handler.NewDefaultServer(internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{Schema: es.Schema()}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
