@@ -29,8 +29,7 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 func (r *queryResolver) Service(ctx context.Context) (*model.Service, error) {
 	s := new(strings.Builder)
 	f := formatter.NewFormatter(s)
-	// parsedSchema is in the generated code
-	f.FormatSchema(parsedSchema)
+	f.FormatSchema(r.Schema)
 
 	service := model.Service{
 		Name:    "user-service",
